@@ -1,7 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://PJay:B0ardwak@ds235785.mlab.com:35785/local_library';
+var mongoDB = process.env.MONGODB_URI || 'mongodb://PJay:B0ardwak@ds235785.mlab.com:35785/local_library';
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
@@ -14,6 +14,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var catalogRouter = require('./routes/catalog');
 var compression = require('compression');
+var helmet = require('helmet');
 
 var app = express();
 
